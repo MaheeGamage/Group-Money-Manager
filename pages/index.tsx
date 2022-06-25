@@ -1,9 +1,12 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import { ReactElement } from 'react'
+import NavLayout from '../layouts/navLayout'
 import styles from '../styles/Home.module.css'
+import { NextPageWithLayout } from './_app'
 
-const SampleHome: NextPage = () => {
+const SampleHome: NextPageWithLayout = () => {
   return (
     <>
       <Head>
@@ -12,67 +15,17 @@ const SampleHome: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="drawer drawer-mobile">
-        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
-
-          <div className="sticky top-0 z-30 flex h-16 w-full justify-center bg-opacity-90 backdrop-blur transition-all duration-100 bg-base-100 text-base-content">
-            <div className="navbar bg-base-100">
-              <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
-            </div>
-          </div>
-
-          <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
-
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec dui in turpis sagittis tincidunt vitae sit amet ipsum. Nulla sed risus at urna dignissim facilisis. Nunc aliquam est ac magna scelerisque, a vehicula sem vestibulum. Nam venenatis in libero et tempus. Nunc cursus lacus ac erat sagittis, euismod dapibus enim mattis. Donec lacus diam, volutpat sit amet maximus non, suscipit vitae dui. Morbi iaculis iaculis urna in malesuada. Aliquam vitae tincidunt urna. In sit amet volutpat orci. Vivamus fringilla scelerisque lectus id porttitor. In ante ante, convallis nec pretium et, ullamcorper sed nibh. Praesent magna orci, finibus vel orci at, scelerisque ultrices lacus. Proin arcu nibh, dictum quis felis vitae, cursus sagittis nibh. Aliquam erat volutpat. Sed convallis quis enim sed cursus.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec dui in turpis sagittis tincidunt vitae sit amet ipsum. Nulla sed risus at urna dignissim facilisis. Nunc aliquam est ac magna scelerisque, a vehicula sem vestibulum. Nam venenatis in libero et tempus. Nunc cursus lacus ac erat sagittis, euismod dapibus enim mattis. Donec lacus diam, volutpat sit amet maximus non, suscipit vitae dui. Morbi iaculis iaculis urna in malesuada. Aliquam vitae tincidunt urna. In sit amet volutpat orci. Vivamus fringilla scelerisque lectus id porttitor. In ante ante, convallis nec pretium et, ullamcorper sed nibh. Praesent magna orci, finibus vel orci at, scelerisque ultrices lacus. Proin arcu nibh, dictum quis felis vitae, cursus sagittis nibh. Aliquam erat volutpat. Sed convallis quis enim sed cursus.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec dui in turpis sagittis tincidunt vitae sit amet ipsum. Nulla sed risus at urna dignissim facilisis. Nunc aliquam est ac magna scelerisque, a vehicula sem vestibulum. Nam venenatis in libero et tempus. Nunc cursus lacus ac erat sagittis, euismod dapibus enim mattis. Donec lacus diam, volutpat sit amet maximus non, suscipit vitae dui. Morbi iaculis iaculis urna in malesuada. Aliquam vitae tincidunt urna. In sit amet volutpat orci. Vivamus fringilla scelerisque lectus id porttitor. In ante ante, convallis nec pretium et, ullamcorper sed nibh. Praesent magna orci, finibus vel orci at, scelerisque ultrices lacus. Proin arcu nibh, dictum quis felis vitae, cursus sagittis nibh. Aliquam erat volutpat. Sed convallis quis enim sed cursus.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec dui in turpis sagittis tincidunt vitae sit amet ipsum. Nulla sed risus at urna dignissim facilisis. Nunc aliquam est ac magna scelerisque, a vehicula sem vestibulum. Nam venenatis in libero et tempus. Nunc cursus lacus ac erat sagittis, euismod dapibus enim mattis. Donec lacus diam, volutpat sit amet maximus non, suscipit vitae dui. Morbi iaculis iaculis urna in malesuada. Aliquam vitae tincidunt urna. In sit amet volutpat orci. Vivamus fringilla scelerisque lectus id porttitor. In ante ante, convallis nec pretium et, ullamcorper sed nibh. Praesent magna orci, finibus vel orci at, scelerisque ultrices lacus. Proin arcu nibh, dictum quis felis vitae, cursus sagittis nibh. Aliquam erat volutpat. Sed convallis quis enim sed cursus.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec dui in turpis sagittis tincidunt vitae sit amet ipsum. Nulla sed risus at urna dignissim facilisis. Nunc aliquam est ac magna scelerisque, a vehicula sem vestibulum. Nam venenatis in libero et tempus. Nunc cursus lacus ac erat sagittis, euismod dapibus enim mattis. Donec lacus diam, volutpat sit amet maximus non, suscipit vitae dui. Morbi iaculis iaculis urna in malesuada. Aliquam vitae tincidunt urna. In sit amet volutpat orci. Vivamus fringilla scelerisque lectus id porttitor. In ante ante, convallis nec pretium et, ullamcorper sed nibh. Praesent magna orci, finibus vel orci at, scelerisque ultrices lacus. Proin arcu nibh, dictum quis felis vitae, cursus sagittis nibh. Aliquam erat volutpat. Sed convallis quis enim sed cursus.</p>
-
-        </div>
-        <div className="drawer-side">
-          <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
-
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
-          </ul>
-
-        </div>
-      </div>
+      <h2>Hi World</h2>
 
     </>
+  )
+}
+
+SampleHome.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <NavLayout>
+      {page}
+    </NavLayout>
   )
 }
 
