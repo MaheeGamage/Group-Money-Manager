@@ -2,9 +2,9 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { ReactElement } from 'react'
-import NavWithSidebarLayout from '../layouts/navWithSidebarLayout copy'
+import NavWithSidebarLayout from '../../layouts/navWithSidebarLayout'
 import styles from '../styles/Home.module.css'
-import { NextPageWithLayout } from './_app'
+import { NextPageWithLayout } from '../_app'
 
 const SampleHome: NextPageWithLayout = () => {
   return (
