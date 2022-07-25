@@ -19,19 +19,28 @@ export const UserInfoCard: FC = props => {
 
     return (
         <>
-            <div className="card w-96 bg-base-100 shadow-xl">
+            <div className="card bg-base-200 shadow-xl">
                 <div className="card-body">
-                    <h2 className="card-title">User Info</h2>
-                    <div className="form-control w-full max-w-xs">
-                        <label className="label">
-                            <span className="label-text">Name</span>
-                        </label>
-                        <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" {...bindUserName}
-                        />
+                    <div className="flex">
+
+                        <div className="flex-1">
+                            <h1 className="card-title text-2xl">Mahee's Budget</h1>
+                            <p>4 Members</p>
+                        </div>
+
+                        <div className="shrink">
+                            <div className="flex h-full items-end prose">
+                                <p className='mb-0 whitespace-pre'>Total </p>
+                                <h1>1234</h1>
+                            </div>
+                        </div>
                     </div>
-                    <div className="card-actions justify-center mt-4">
-                        <button className="btn btn-primary btn-block" onClick={handleUserInfoSubmit}>Enter</button>
-                    </div>
+                    {/* <div className='flex mt-8 justify-around'>
+                        <button className="btn btn-outline btn-info mx-1 grow ">Info</button>
+                        <button className="btn btn-outline btn-success mx-1 grow ">Success</button>
+                        <button className="btn btn-outline btn-warning mx-1 grow ">Warning</button>
+                        <button className="btn btn-error mx-1 grow ">Error</button>
+                    </div> */}
                 </div>
             </div>
         </>
