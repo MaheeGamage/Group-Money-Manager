@@ -23,10 +23,7 @@ const SampleHome: NextPageWithLayout = () => {
         <UserInfoCard />
 
         <div className='flex mt-8 justify-around'>
-          <button className="btn btn-outline btn-info mx-1 grow ">Info</button>
-          <button className="btn btn-outline btn-success mx-1 grow ">Success</button>
-          <button className="btn btn-outline btn-warning mx-1 grow ">Warning</button>
-          <button className="btn btn-error mx-1 grow ">Error</button>
+          <button className="btn btn-outline btn-success mx-1 grow ">Calculate</button>
         </div>
 
         <div className="overflow-x-auto w-full mt-8">

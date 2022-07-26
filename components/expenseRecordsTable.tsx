@@ -1,6 +1,13 @@
-import { FC } from "react"
+import { FC, useState } from "react"
+import { ITransactionRecord } from "../models/ITransactionRecord";
 
 export const ExpenseRecordsTable: FC = props => {
+    const sampleList: ITransactionRecord[] = [
+        {id: 1, type: "Expence", amount: 100, description: "Groceries", person: "John"},
+    ]
+
+    const [records, updateRecords] = useState<Array<ITransactionRecord>>([]);
+
     return (
         <>
             <table className="table w-full">
@@ -31,7 +38,7 @@ export const ExpenseRecordsTable: FC = props => {
                     <tr>
                         {/* center div */}
                         <td colSpan={3}>
-                            <button className="btn btn-block btn-outline">Add Entry</button>
+                            <button className="btn btn-block btn-outline h-8 min-h-full">Add Entry</button>
                         </td>
                     </tr>
                 </tbody>
