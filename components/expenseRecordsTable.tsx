@@ -1,25 +1,30 @@
 import { FC, useState } from "react"
 import { ITransactionRecord } from "../models/ITransactionRecord";
+import { useStore } from "../store/store";
 
-let idKey = 0;
+let idKey = 0;  
 
 export const ExpenseRecordsTable: FC = props => {
     const sampleList: ITransactionRecord[] = [
         { id: 1, type: "Expence", amount: 100, description: "Groceries", person: "John" },
     ]
 
-    const [records, updateRecords] = useState<Array<ITransactionRecord>>([]);
+    // Zustand Store
+    const transactionRecords = useStore(state => state.transactionRecords)
+    const addTransactionRecord = useStore(state => state.addTransactionRecord);
+    const removeTransactionRecord = useStore(state => state.removeTransactionRecord);
 
+    // Component supporting functions
     const handleRemoveRecord = (id: number) => {
-        updateRecords(records.filter(record => record.id !== id));
+        removeTransactionRecord(id);
     };
 
     const handleAddItem = (record: ITransactionRecord) => {
-        updateRecords(existingRecords => [...existingRecords, record]);
+        addTransactionRecord(record);
     };
 
     const renderTransactionRecords = () => {
-        return records.map(record => {
+        return transactionRecords.map(record => {
             return (
                 <tr key={record.id}>
                     <td>{record.person}</td>
