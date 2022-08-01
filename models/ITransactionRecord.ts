@@ -3,5 +3,5 @@ export interface ITransactionRecord {
     type: string;
     amount: number;
     person: string;
-    description: string;
+    description?: string;
 }
