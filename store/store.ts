@@ -7,6 +7,7 @@ interface GlobalState {
     removeTransactionRecord: (id: number) => void
 }
 
+// Globale store declaration
 export const useStore = create<GlobalState>(set => ({
     transactionRecords: [],
     addTransactionRecord: (record) => set(state => ({transactionRecords: [...state.transactionRecords, record]})),

@@ -49,8 +49,7 @@ const NavWithSidebarLayout = ({ children }: NavLayoutProps) => {
 						</div>
 
 						<ul className="menu p-4 overflow-y-auto bg-base-100 text-base-content">
-							<li><a>Sidebar Item 1</a></li>
-							<li><a>Sidebar Item 2</a></li>
+							<li><a>Main</a></li>
 						</ul>
 					</aside>
 				</div>

@@ -2,13 +2,9 @@ import { FC, useState } from "react"
 import { ITransactionRecord } from "../models/ITransactionRecord";
 import { useStore } from "../store/store";
 
-let idKey = 0;  
+let idKey = 0;
 
 export const ExpenseRecordsTable: FC = props => {
-    const sampleList: ITransactionRecord[] = [
-        { id: 1, type: "Expence", amount: 100, description: "Groceries", person: "John" },
-    ]
-
     // Zustand Store
     const transactionRecords = useStore(state => state.transactionRecords)
     const addTransactionRecord = useStore(state => state.addTransactionRecord);
@@ -48,6 +44,11 @@ export const ExpenseRecordsTable: FC = props => {
                 </thead>
                 <tbody>
                     {renderTransactionRecords()}
+                    {/* <tr>
+                        <td className="p-0"><input type="text" placeholder="Name" className="input input-xs w-full max-w-xs bg-neutral" /></td>
+                        <td className="p-0"><input type="text" placeholder="Description" className="input input-xs w-full max-w-xs bg-neutral" /></td>
+                        <td className="p-0"><input type="text" placeholder="Amount" className="input input-xs w-full max-w-xs bg-neutral" /></td>
+                    </tr> */}
                     <tr>
                         <td colSpan={3}>
                             <button
