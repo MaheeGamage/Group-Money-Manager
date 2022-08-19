@@ -1,7 +1,10 @@
+import { type } from "os";
 import { FC, useState } from "react"
 import { ITransactionRecord } from "../models/ITransactionRecord";
 import { useStore } from "../store/store";
 import Modal, { ModalAction } from "./Modal/Modal";
+
+let idKey = 0;
 
 export const ExpenseRecordsTable: FC = props => {
     // Zustand Store
@@ -9,6 +12,11 @@ export const ExpenseRecordsTable: FC = props => {
     const addTransactionRecord = useStore(state => state.addTransactionRecord);
     const removeTransactionRecord = useStore(state => state.removeTransactionRecord);
     const [showAddNewRecordModal, setShowAddNewRecordModal] = useState(false);
+    const [modalForm, setModalForm] = useState({
+        [formInputType.NAME]: "",
+        [formInputType.DESCRIPTION]: "",
+        [formInputType.AMOUNT]: ""
+    });
 
     // Component supporting functions
     const handleRemoveRecord = (id: number) => {
@@ -24,6 +32,17 @@ export const ExpenseRecordsTable: FC = props => {
             case ModalAction.CLOSE:
                 setShowAddNewRecordModal(false);
         }
+    }
+
+    const handleNewRecordInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        setModalForm({
+            ...modalForm,
+            [name]: value
+        });
     }
 
     const renderTransactionRecords = () => {
@@ -45,19 +64,33 @@ export const ExpenseRecordsTable: FC = props => {
                 onModalEvent={handleModalEvents}
             >
                 <h3 className="font-bold text-lg">Enter Transaction Info</h3>
-                <div className="form-control w-full max-w-xs">
-                    {/* <label className="label">
-                        <span className="label-text">What is your name?</span>
-                        <span className="label-text-alt">Alt label</span>
-                    </label> */}
-                    <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
-                    {/* <label className="label">
-                        <span className="label-text-alt">Alt label</span>
-                        <span className="label-text-alt">Alt label</span>
-                    </label> */}
+                <div className="form-control w-full mt-3">
+                    <label className="label">
+                        <span className="label-text">Name</span>
+                    </label>
+                    <input name={formInputType.NAME} type="text" placeholder="Type person name" className="input input-bordered w-full" onChange={handleNewRecordInputChange} />
+
+                    <label className="label">
+                        <span className="label-text">Description</span>
+                    </label>
+                    <input name={formInputType.DESCRIPTION} type="text" placeholder="Type description" className="input input-bordered w-full" onChange={handleNewRecordInputChange} />
+
+                    <label className="label">
+                        <span className="label-text">Amount</span>
+                    </label>
+                    <input name={formInputType.AMOUNT} type="text" placeholder="Enter amount" className="input input-bordered w-full" onChange={handleNewRecordInputChange} />
                 </div>
                 <div className="modal-action">
-                    <label className="btn">Yay!</label>
+                    <button className="btn btn-outline btn-secondary mx-1 grow"
+                        onClick={() => handleAddItem({
+                            id: ++idKey,
+                            type: "Expence", 
+                            amount: parseInt(modalForm[formInputType.AMOUNT]),
+                            description: modalForm[formInputType.DESCRIPTION],
+                            person: modalForm[formInputType.NAME]
+                        })}>
+                        Add
+                    </button>
                 </div>
             </Modal>
 
@@ -92,4 +125,10 @@ export const ExpenseRecordsTable: FC = props => {
             </table>
         </>
     )
+}
+
+enum formInputType {
+    NAME = "NAME",
+    DESCRIPTION = "DESCRIPTION",
+    AMOUNT = "AMOUNT"
 }
