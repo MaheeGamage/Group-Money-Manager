@@ -1,6 +1,6 @@
 import { type } from "os";
 import { FC, useState } from "react"
-import { ITransactionRecord } from "../models/ITransactionRecord";
+import { ITransactionRecord, TransactionType } from "../models/TransactionRecord.model";
 import { useStore } from "../store/store";
 import Modal, { ModalAction } from "./Modal/Modal";
 
@@ -15,7 +15,8 @@ export const ExpenseRecordsTable: FC = props => {
     const [modalForm, setModalForm] = useState({
         [formInputType.NAME]: "",
         [formInputType.DESCRIPTION]: "",
-        [formInputType.AMOUNT]: ""
+        [formInputType.AMOUNT]: "",
+        [formInputType.TYPE]: ""
     });
 
     // Component supporting functions
@@ -51,6 +52,7 @@ export const ExpenseRecordsTable: FC = props => {
                 <tr key={record.id}>
                     <td>{record.person}</td>
                     <td>{record.description}</td>
+                    <td>{record.type}</td>
                     <td>{record.amount}</td>
                 </tr>
             );
@@ -76,6 +78,28 @@ export const ExpenseRecordsTable: FC = props => {
                     <input name={formInputType.DESCRIPTION} type="text" placeholder="Type description" className="input input-bordered w-full" onChange={handleNewRecordInputChange} />
 
                     <label className="label">
+                        <span className="label-text">Expense type</span>
+                    </label>
+                    <div className="flex">
+                        <div className="inline-flex">
+                            <input type="radio" name={formInputType.TYPE} className="radio checked:bg-red-500"
+                                value={TransactionType.EXPENSE}
+                                onChange={handleNewRecordInputChange}
+                                checked={TransactionType.EXPENSE === modalForm[formInputType.TYPE]}
+                            />
+                            <span className="label-text ml-2">Expense</span>
+                        </div>
+                        <div className="inline-flex ml-10">
+                            <input type="radio" name={formInputType.TYPE} className="radio checked:bg-red-500"
+                                value={TransactionType.TRANSFER}
+                                onChange={handleNewRecordInputChange}
+                                checked={TransactionType.TRANSFER === modalForm[formInputType.TYPE]}
+                            />
+                            <span className="label-text ml-2">Transfer</span>
+                        </div>
+                    </div>
+
+                    <label className="label">
                         <span className="label-text">Amount</span>
                     </label>
                     <input name={formInputType.AMOUNT} type="text" placeholder="Enter amount" className="input input-bordered w-full" onChange={handleNewRecordInputChange} />
@@ -84,7 +108,7 @@ export const ExpenseRecordsTable: FC = props => {
                     <button className="btn btn-outline btn-secondary mx-1 grow"
                         onClick={() => handleAddItem({
                             id: ++idKey,
-                            type: "Expence", 
+                            type: modalForm[formInputType.TYPE] as TransactionType,
                             amount: parseInt(modalForm[formInputType.AMOUNT]),
                             description: modalForm[formInputType.DESCRIPTION],
                             person: modalForm[formInputType.NAME]
@@ -100,6 +124,7 @@ export const ExpenseRecordsTable: FC = props => {
                     <tr>
                         <th>Name</th>
                         <th>Description</th>
+                        <th>Type</th>
                         <th>Amount</th>
                     </tr>
                 </thead>
@@ -111,10 +136,9 @@ export const ExpenseRecordsTable: FC = props => {
                         <td className="p-0"><input type="text" placeholder="Amount" className="input input-xs w-full max-w-xs bg-neutral" /></td>
                     </tr> */}
                     <tr>
-                        <td colSpan={3}>
+                        <td colSpan={4}>
                             <button
                                 className="btn btn-block btn-outline h-8 min-h-full"
-                                // onClick={() => handleAddItem({ id: ++idKey, type: "Expence", amount: 100, description: "Groceries", person: "John" })}
                                 onClick={() => setShowAddNewRecordModal(true)}
                             >
                                 Add Entry
@@ -128,7 +152,8 @@ export const ExpenseRecordsTable: FC = props => {
 }
 
 enum formInputType {
-    NAME = "NAME",
-    DESCRIPTION = "DESCRIPTION",
-    AMOUNT = "AMOUNT"
+    NAME = "EXPENSE-RECORD-TABLE-MODAL-NAME",
+    DESCRIPTION = "EXPENSE-RECORD-TABLE-MODAL-DESCRIPTION",
+    TYPE = "EXPENSE-RECORD-TABLE-MODAL-TYPE",
+    AMOUNT = "EXPENSE-RECORD-TABLE-MODAL-AMOUNT"
 }

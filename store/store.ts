@@ -1,5 +1,5 @@
 import create from 'zustand'
-import { ITransactionRecord } from '../models/ITransactionRecord'
+import { ITransactionRecord } from '../models/TransactionRecord.model'
 
 interface GlobalState {
     transactionRecords: Array<ITransactionRecord>
