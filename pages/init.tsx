@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { UserInfoCard } from "../components/cards/userInfoCard";
+import { UserInfoCard } from "../src/components/cards/userInfoCard";
 
 const Init: NextPage = () => {
     return (

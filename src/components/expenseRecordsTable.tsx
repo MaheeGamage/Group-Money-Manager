@@ -1,5 +1,6 @@
 import { type } from "os";
 import { FC, useState } from "react"
+import { SubmitHandler, useForm } from "react-hook-form";
 import { ITransactionRecord, TransactionType } from "../models/TransactionRecord.model";
 import { useStore } from "../store/store";
 import Modal, { ModalAction } from "./Modal/Modal";
@@ -12,12 +13,7 @@ export const ExpenseRecordsTable: FC = props => {
     const addTransactionRecord = useStore(state => state.addTransactionRecord);
     const removeTransactionRecord = useStore(state => state.removeTransactionRecord);
     const [showAddNewRecordModal, setShowAddNewRecordModal] = useState(false);
-    const [modalForm, setModalForm] = useState({
-        [formInputType.NAME]: "",
-        [formInputType.DESCRIPTION]: "",
-        [formInputType.AMOUNT]: "",
-        [formInputType.TYPE]: ""
-    });
+    const { register, handleSubmit, watch, formState: { errors } } = useForm<ITransactionRecord>();
 
     // Component supporting functions
     const handleRemoveRecord = (id: number) => {
@@ -35,28 +31,21 @@ export const ExpenseRecordsTable: FC = props => {
         }
     }
 
-    const handleNewRecordInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-
-        setModalForm({
-            ...modalForm,
-            [name]: value
-        });
-    }
-
     const renderTransactionRecords = () => {
         return transactionRecords.map(record => {
             return (
                 <tr key={record.id}>
                     <td>{record.person}</td>
                     <td>{record.description}</td>
-                    <td>{record.type}</td>
                     <td>{record.amount}</td>
                 </tr>
             );
         });
+    }
+
+    const onTransactionInputSubmit: SubmitHandler<ITransactionRecord> = data => {
+        console.log(data);
+        handleAddItem({...data, id: idKey++});
     }
 
     return (
@@ -66,18 +55,22 @@ export const ExpenseRecordsTable: FC = props => {
                 onModalEvent={handleModalEvents}
             >
                 <h3 className="font-bold text-lg">Enter Transaction Info</h3>
-                <div className="form-control w-full mt-3">
+                <form className="form-control w-full mt-3" onSubmit={handleSubmit(onTransactionInputSubmit)}>
                     <label className="label">
                         <span className="label-text">Name</span>
                     </label>
-                    <input name={formInputType.NAME} type="text" placeholder="Type person name" className="input input-bordered w-full" onChange={handleNewRecordInputChange} />
+                    <input type="text" placeholder="Type person name" className="input input-bordered w-full"
+                        {...register("person", { required: true })} />
 
                     <label className="label">
                         <span className="label-text">Description</span>
                     </label>
-                    <input name={formInputType.DESCRIPTION} type="text" placeholder="Type description" className="input input-bordered w-full" onChange={handleNewRecordInputChange} />
+                    <input type="text" placeholder="Type description" className="input input-bordered w-full"
+                        {...register("description", { required: true })} />
 
-                    <label className="label">
+                    {/* Transaction type */}
+                    {/* TODO - enable this in next release */}
+                    {/* <label className="label">
                         <span className="label-text">Expense type</span>
                     </label>
                     <div className="flex">
@@ -97,25 +90,18 @@ export const ExpenseRecordsTable: FC = props => {
                             />
                             <span className="label-text ml-2">Transfer</span>
                         </div>
-                    </div>
+                    </div> */}
 
                     <label className="label">
                         <span className="label-text">Amount</span>
                     </label>
-                    <input name={formInputType.AMOUNT} type="text" placeholder="Enter amount" className="input input-bordered w-full" onChange={handleNewRecordInputChange} />
-                </div>
-                <div className="modal-action">
-                    <button className="btn btn-outline btn-secondary mx-1 grow"
-                        onClick={() => handleAddItem({
-                            id: ++idKey,
-                            type: modalForm[formInputType.TYPE] as TransactionType,
-                            amount: parseInt(modalForm[formInputType.AMOUNT]),
-                            description: modalForm[formInputType.DESCRIPTION],
-                            person: modalForm[formInputType.NAME]
-                        })}>
-                        Add
-                    </button>
-                </div>
+                    <input type="number" placeholder="Enter amount" className="input input-bordered w-full"
+                        {...register("amount", { required: true, valueAsNumber: true })} />
+
+                    <div className="modal-action">
+                        <button className="btn btn-outline btn-secondary mx-1 grow" type="submit">Add</button>
+                    </div>
+                </form>
             </Modal>
 
             <table className="table w-full">
@@ -124,17 +110,11 @@ export const ExpenseRecordsTable: FC = props => {
                     <tr>
                         <th>Name</th>
                         <th>Description</th>
-                        <th>Type</th>
                         <th>Amount</th>
                     </tr>
                 </thead>
                 <tbody>
                     {renderTransactionRecords()}
-                    {/* <tr>
-                        <td className="p-0"><input type="text" placeholder="Name" className="input input-xs w-full max-w-xs bg-neutral" /></td>
-                        <td className="p-0"><input type="text" placeholder="Description" className="input input-xs w-full max-w-xs bg-neutral" /></td>
-                        <td className="p-0"><input type="text" placeholder="Amount" className="input input-xs w-full max-w-xs bg-neutral" /></td>
-                    </tr> */}
                     <tr>
                         <td colSpan={4}>
                             <button
