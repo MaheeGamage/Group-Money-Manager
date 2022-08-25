@@ -2,9 +2,11 @@ import { FC } from "react";
 import { useHandleInput } from "../../hooks/useHandleInput";
 import { MAIN_USER_NAME_LOCAL_STORAGE_KEY } from "../../constants/constants"
 import Router from "next/router";
+import { useStore } from "../../store/store";
 
 export const UserInfoCard: FC = props => {
 
+    const totalBudget = useStore(state => state.totalBudget)
     const { value: valueUserName, bind: bindUserName } = useHandleInput('');
 
     const handleUserInfoSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -31,7 +33,7 @@ export const UserInfoCard: FC = props => {
                         <div className="shrink">
                             <div className="flex h-full items-end prose">
                                 <p className='mb-0 whitespace-pre'>Total </p>
-                                <h1>1234</h1>
+                                <h1>{totalBudget}</h1>
                             </div>
                         </div>
                     </div>
