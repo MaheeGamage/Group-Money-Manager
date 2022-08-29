@@ -45,7 +45,7 @@ export const ExpenseRecordsTable: FC = props => {
 
     const onTransactionInputSubmit: SubmitHandler<ITransactionRecord> = data => {
         console.log(data);
-        handleAddItem({...data, id: idKey++});
+        handleAddItem({ ...data, id: idKey++ });
     }
 
     return (
@@ -59,8 +59,14 @@ export const ExpenseRecordsTable: FC = props => {
                     <label className="label">
                         <span className="label-text">Name</span>
                     </label>
-                    <input type="text" placeholder="Type person name" className="input input-bordered w-full"
-                        {...register("person", { required: true })} />
+                    <select className="select select-bordered w-full" {...register("person", { required: true })}>
+                        <option disabled selected>Select a person or create one</option>
+                        <option>Mahee</option>
+                        <option>Kasun</option>
+                        <option>Lakshan</option>
+                    </select>
+                    {/* <input type="text" placeholder="Type person name" className="input input-bordered w-full"
+                        {...register("person", { required: true })} /> */}
 
                     <label className="label">
                         <span className="label-text">Description</span>
