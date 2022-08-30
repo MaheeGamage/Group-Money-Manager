@@ -14,6 +14,7 @@ export const ExpenseRecordsTable: FC = props => {
     const removeTransactionRecord = useStore(state => state.removeTransactionRecord);
     const [showAddNewRecordModal, setShowAddNewRecordModal] = useState(false);
     const { register, handleSubmit, watch, formState: { errors } } = useForm<ITransactionRecord>();
+    const members = useStore(state => state.members)
 
     // Component supporting functions
     const handleRemoveRecord = (id: number) => {
@@ -60,10 +61,13 @@ export const ExpenseRecordsTable: FC = props => {
                         <span className="label-text">Name</span>
                     </label>
                     <select className="select select-bordered w-full" {...register("person", { required: true })}>
-                        <option disabled selected>Select a person or create one</option>
-                        <option>Mahee</option>
-                        <option>Kasun</option>
-                        <option>Lakshan</option>
+                        <option value="" disabled selected>Select a person or create one</option>
+                        {members.map(member => {
+                            return (
+                                <option key={member.id} value={member.name}>{member.name}</option>
+                            );
+                        })}
+
                     </select>
                     {/* <input type="text" placeholder="Type person name" className="input input-bordered w-full"
                         {...register("person", { required: true })} /> */}
