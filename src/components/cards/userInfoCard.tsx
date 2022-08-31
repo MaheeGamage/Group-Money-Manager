@@ -7,8 +7,7 @@ import Modal, { ModalAction } from "../Modal/Modal";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ITransactionRecord } from "../../models/TransactionRecord.model";
 import { IMember } from "../../models/Member.model";
-
-let idKey = 0;
+import { generateMemberId } from "../../util/stringUtil";
 
 export const UserInfoCard: FC = props => {
 
@@ -39,8 +38,10 @@ export const UserInfoCard: FC = props => {
     }
 
     const onNewUserSubmit: SubmitHandler<IMember> = data => {
-        console.log(data);
-        addMember({...data, id: idKey++});
+        addMember({ ...data, id: generateMemberId(data.name) })
+            .catch(error => {
+                alert("User Already Exists");
+            })
     }
 
     return (
