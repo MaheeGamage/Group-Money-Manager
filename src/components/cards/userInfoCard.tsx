@@ -2,12 +2,12 @@ import { FC, useState } from "react";
 import { useHandleInput } from "../../hooks/useHandleInput";
 import { MAIN_USER_NAME_LOCAL_STORAGE_KEY } from "../../constants/constants"
 import Router from "next/router";
-import { useStore } from "../../store/store";
 import Modal, { ModalAction } from "../Modal/Modal";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ITransactionRecord } from "../../models/TransactionRecord.model";
 import { IMember } from "../../models/Member.model";
 import { generateMemberId } from "../../util/stringUtil";
+import { useStore } from "../../store/store";
 
 export const UserInfoCard: FC = props => {
 
