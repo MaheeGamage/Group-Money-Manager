@@ -5,7 +5,7 @@ import { MemberSlice, TransactionRecordSlice } from './store.model'
 
 export const createMemberSlice: StateCreator<
     MemberSlice & TransactionRecordSlice,
-    [["zustand/subscribeWithSelector", never]],
+    [["zustand/devtools", never], ["zustand/subscribeWithSelector", never]],
     [],
     MemberSlice
 > = (set, get) => ({

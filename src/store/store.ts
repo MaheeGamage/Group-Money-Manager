@@ -1,5 +1,5 @@
 import create from "zustand";
-import { subscribeWithSelector } from "zustand/middleware";
+import { devtools, subscribeWithSelector } from "zustand/middleware";
 import shallow from "zustand/shallow";
 import { createMemberSlice } from "./member.slice";
 import { GlobalState, MemberSlice, TransactionRecordSlice } from "./store.model";
@@ -7,10 +7,10 @@ import { createTransactionSlice } from "./transaction.slice";
 
 
 // This store is created using the zustand library.
-export const useStore = create<GlobalState>()(subscribeWithSelector((...a) => ({
+export const useStore = create<GlobalState>()(devtools(subscribeWithSelector((...a) => ({
     ...createMemberSlice(...a),
     ...createTransactionSlice(...a)
-})))
+}))))
 
 // Middleware is used to subscribe to each transaction and update the total budget.
 useStore.subscribe(
