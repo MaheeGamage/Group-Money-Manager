@@ -1,4 +1,4 @@
-import create, { StateCreator, useStore } from 'zustand'
+import create, { StateCreator } from 'zustand'
 import { ITransactionRecord } from '../models/TransactionRecord.model'
 import { subscribeWithSelector } from 'zustand/middleware'
 import shallow from 'zustand/shallow'

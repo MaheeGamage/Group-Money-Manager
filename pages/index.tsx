@@ -7,8 +7,17 @@ import { ExpenseRecordsTable } from '../src/components/expenseRecordsTable'
 import NavWithSidebarLayout from '../layouts/navWithSidebarLayout'
 import styles from '../styles/Home.module.css'
 import { NextPageWithLayout } from './_app'
+import { BudgetSplitType } from '../src/constants/constants'
+import { BudgetSplitServiceFactory } from '../src/services/budget'
 
 const SampleHome: NextPageWithLayout = () => {
+
+  const handleBudgetCalculate = () => {
+    const budgetCalculateService = BudgetSplitServiceFactory.getBudgetSplitService(BudgetSplitType.EQUALLY)
+    const result = budgetCalculateService.getSplitAmounts()
+    console.log(result);
+  }
+
   return (
     <>
       <Head>
@@ -23,7 +32,11 @@ const SampleHome: NextPageWithLayout = () => {
         <UserInfoCard />
 
         <div className='flex mt-8 justify-around'>
-          <button className="btn btn-outline btn-success mx-1 grow ">Calculate</button>
+          <button className="btn btn-outline btn-success mx-1 grow"
+            onClick={handleBudgetCalculate}
+          >
+            Calculate
+          </button>
         </div>
 
         <div className="overflow-x-auto w-full mt-8">
