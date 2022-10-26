@@ -44,6 +44,10 @@ export const UserInfoCard: FC = props => {
             })
     }
 
+    const onClickRemoveUser = (member: IMember) => {
+        removeMember(member.id);
+    }
+
     return (
         <>
             <Modal
@@ -65,7 +69,6 @@ export const UserInfoCard: FC = props => {
             <div className="card bg-base-200 shadow-xl">
                 <div className="card-body">
                     <div className="flex">
-
                         <div className="flex-1">
                             <h1 className="card-title text-2xl">Mahee's Budget</h1>
                             <div className="flex ">
@@ -88,12 +91,17 @@ export const UserInfoCard: FC = props => {
                             </div>
                         </div>
                     </div>
-                    {/* <div className='flex mt-8 justify-around'>
-                        <button className="btn btn-outline btn-info mx-1 grow ">Info</button>
-                        <button className="btn btn-outline btn-success mx-1 grow ">Success</button>
-                        <button className="btn btn-outline btn-warning mx-1 grow ">Warning</button>
-                        <button className="btn btn-error mx-1 grow ">Error</button>
-                    </div> */}
+                    <div className="mt-2">
+                        {members.map((member, index) =>
+                            <div className="flex bg-base-300 p-2 mb-1 rounded-xl">
+                                <p>{member.name}</p>
+                                {index == 0 ? <div className="badge badge-primary badge-outline mr-2">primary</div> : null}
+                                <button className="btn btn-circle btn-outline btn-xs" onClick={() => onClickRemoveUser(member)}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                                </button>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </>
