@@ -26,7 +26,6 @@ export const useStore = create<GlobalState>()(
               return new Promise(async (resolve) => {
                 // TODO - this is temporary solution only. Write a better solution
                 await setTimeout(async () => {
-                  console.log('Waiting Over');
                   resolve(val)
                 }, 2000)
               })
