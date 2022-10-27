@@ -2,7 +2,7 @@ export interface ITransactionRecord {
     id: number;
     type: TransactionType;
     amount: number;
-    person: string;
+    memberId: string;
     description?: string;
 }
 

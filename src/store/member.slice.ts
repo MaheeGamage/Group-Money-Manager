@@ -4,22 +4,22 @@ import { validateUniqueMember } from '../util/validation/memberValidation'
 import { MemberSlice, TransactionRecordSlice } from './store.model'
 
 export const createMemberSlice: StateCreator<
-    MemberSlice & TransactionRecordSlice,
-    [["zustand/devtools", never], ["zustand/subscribeWithSelector", never], ["zustand/persist", unknown]],
-    [],
-    MemberSlice
+  MemberSlice & TransactionRecordSlice,
+  [["zustand/devtools", never], ["zustand/subscribeWithSelector", never], ["zustand/persist", unknown]],
+  [],
+  MemberSlice
 > = (set, get) => ({
-    members: [],
-    addMember: (member) => {
-        return new Promise((resolve, reject) => {
-          if (validateUniqueMember(get().members, member)) {
-            set(state => ({ members: [...state.members, member] }))
-            resolve(true);
-          }
-          else {
-            reject(false);
-          }
-        })
-      },
-    removeMember: (id) => set(state => ({ members: state.members.filter(member => member.id !== id) }))
+  members: [],
+  addMember: (member) => {
+    return new Promise((resolve, reject) => {
+      if (validateUniqueMember(get().members, member)) {
+        set(state => ({ members: [...state.members, member] }))
+        resolve(true);
+      }
+      else {
+        reject(false);
+      }
+    })
+  },
+  removeMember: (id) => set(state => ({ members: state.members.filter(member => member.id !== id) }))
 })

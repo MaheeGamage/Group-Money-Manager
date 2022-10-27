@@ -8,6 +8,7 @@ import { ITransactionRecord } from "../../models/TransactionRecord.model";
 import { IMember } from "../../models/Member.model";
 import { generateMemberId } from "../../util/stringUtil";
 import { useStore } from "../../store/store";
+import { validateBeforeMemberDeletion } from "../../services/memberService";
 
 export const UserInfoCard: FC = props => {
 
@@ -45,7 +46,10 @@ export const UserInfoCard: FC = props => {
     }
 
     const onClickRemoveUser = (member: IMember) => {
-        removeMember(member.id);
+        if (validateBeforeMemberDeletion(member.id))
+            alert('User cannot be deleted as he/she has some transactions associated with him/her');
+        else
+            removeMember(member.id);
     }
 
     return (

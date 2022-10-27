@@ -36,7 +36,7 @@ export const ExpenseRecordsTable: FC = props => {
         return transactionRecords.map(record => {
             return (
                 <tr key={record.id}>
-                    <td>{record.person}</td>
+                    <td>{record.memberId}</td>
                     <td>{record.description}</td>
                     <td>{record.amount}</td>
                 </tr>
@@ -60,7 +60,7 @@ export const ExpenseRecordsTable: FC = props => {
                     <label className="label">
                         <span className="label-text">Name</span>
                     </label>
-                    <select className="select select-bordered w-full" {...register("person", { required: true })}>
+                    <select className="select select-bordered w-full" {...register("memberId", { required: true })}>
                         <option value="" disabled selected>Select a person or create one</option>
                         {members.map(member => {
                             return (
