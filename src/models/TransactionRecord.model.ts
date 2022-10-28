@@ -7,6 +7,7 @@ export interface ITransactionRecord {
 }
 
 export enum TransactionType {
-    EXPENSE = 'Expense',
-    TRANSFER = 'Transfer',
+    PAID = "Paid",
+    UNPAID = "Unpaid",
+    SPECIAL_DEDUCTION = "SpecialDeduction",
 }

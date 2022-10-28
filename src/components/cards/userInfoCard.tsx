@@ -97,11 +97,11 @@ export const UserInfoCard: FC = props => {
                     </div>
                     <div className="mt-2">
                         {members.map((member, index) =>
-                            <div className="flex bg-base-300 p-2 mb-1 rounded-xl">
+                            <div className="flex bg-base-300 p-2 mb-1 rounded-xl" key={member.id}>
                                 <p>{member.name}</p>
                                 {index == 0 ? <div className="badge badge-primary badge-outline mr-2">primary</div> : null}
                                 <button className="btn btn-circle btn-outline btn-xs" onClick={() => onClickRemoveUser(member)}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
                                 </button>
                             </div>
                         )}
