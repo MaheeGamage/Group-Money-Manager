@@ -40,6 +40,7 @@ export const ExpenseRecordsTable: FC = props => {
         return transactionRecords.map(record => {
             return (
                 <tr key={record.id}>
+                    <td>{record.type}</td>
                     <td>{record.memberId}</td>
                     <td>{record.description}</td>
                     <td>{record.amount}</td>
@@ -75,10 +76,6 @@ export const ExpenseRecordsTable: FC = props => {
                             <input type="radio" {...register(nameof<ITransactionRecord>("type"))} value={TransactionType.PAID} className="radio radio-primary" id="radio_paid" />
                             <label htmlFor="radio_paid" className="mx-1">Paid</label>
                         </div>
-                        <div className="flex">
-                            <input type="radio" {...register(nameof<ITransactionRecord>("type"))} value={TransactionType.SPECIAL_DEDUCTION} className="radio radio-primary" id="radio_special" />
-                            <label htmlFor="radio_special" className="mx-1">Special Deduction</label>
-                        </div>
                     </div>
 
                     <label className="label">
@@ -86,7 +83,7 @@ export const ExpenseRecordsTable: FC = props => {
                     </label>
                     <select className="select select-bordered w-full" {...register(nameof<ITransactionRecord>("memberId"), { required: true })} disabled={watchTransactionType === TransactionType.UNPAID}>
                         <option value="" disabled>Select a person or create one</option>
-                        {members.map(member => <option key={member.id} value={member.name}>{member.name}</option>)}
+                        {members.map(member => <option key={member.id} value={member.id}>{member.name}</option>)}
                     </select>
 
                     <label className="label">
@@ -111,7 +108,8 @@ export const ExpenseRecordsTable: FC = props => {
 
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Member Name</th>
                         <th>Description</th>
                         <th>Amount</th>
                         <th>Options</th>
@@ -120,7 +118,7 @@ export const ExpenseRecordsTable: FC = props => {
                 <tbody>
                     {renderTransactionRecords()}
                     <tr>
-                        <td colSpan={4}>
+                        <td colSpan={5}>
                             <button
                                 className="btn btn-block btn-outline h-8 min-h-full"
                                 onClick={() => setShowAddNewRecordModal(true)}

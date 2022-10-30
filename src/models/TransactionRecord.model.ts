@@ -6,8 +6,13 @@ export interface ITransactionRecord {
     description?: string;
 }
 
+export interface IBudgetCalculationResult {
+    memberId: string;
+    member: string;
+    amount: number;
+}
+
 export enum TransactionType {
     PAID = "Paid",
     UNPAID = "Unpaid",
-    SPECIAL_DEDUCTION = "SpecialDeduction",
 }
