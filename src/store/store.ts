@@ -18,21 +18,6 @@ export const useStore = create<GlobalState>()(
         }),
         {
           name: 'budget-storage',
-          getStorage: () => ({
-            // Returning a promise from getItem is necessary to avoid issues with hydration
-            // getItem: async (name: string) => localStorage.getItem(name),
-            getItem: async (name: string) => {
-              let val = localStorage.getItem(name)
-              return new Promise(async (resolve) => {
-                // TODO - this is temporary solution only. Write a better solution
-                await setTimeout(async () => {
-                  resolve(val)
-                }, 2000)
-              })
-            },
-            setItem: async (name: string, value: string) => localStorage.setItem(name, value),
-            removeItem: async (name: string) => localStorage.removeItem(name),
-          }),
         }
       )
     )
