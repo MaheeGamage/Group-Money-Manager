@@ -74,7 +74,7 @@ export const UserInfoCard: FC = props => {
                 <div className="card-body">
                     <div className="flex">
                         <div className="flex-1">
-                            <h1 className="card-title text-2xl">Mahee's Budget</h1>
+                            <h1 className="card-title text-2xl">Mahee`s Budget</h1>
                             <div className="flex ">
                                 <p className="flex-none">{members.length} Members</p>
                                 <button

@@ -36,7 +36,7 @@ const SampleHome: NextPageWithLayout = () => {
         {budgetCalculationResults.map(result => {
           const resultString = `${result.member} need to pay ${result.amount}`
           return (
-            <p>{resultString}</p>
+            <p key={result.memberId}>{resultString}</p>
           )
         })}
       </Modal>
